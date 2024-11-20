@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
-
+import { ThreeDots } from 'react-loader-spinner'
 import ProductCard from '../ProductCard'
 
 import './index.css'
@@ -83,10 +82,11 @@ class PrimeDealsSection extends Component {
   )
 
   renderLoadingView = () => (
-    <div className="primedeals-loader-container">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    <div className="products-loader-container">
+      <ThreeDots color="#0b69ff" height={50} width={50} />
     </div>
   )
+  
 
   render() {
     const {apiStatus} = this.state

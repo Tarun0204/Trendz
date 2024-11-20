@@ -1,7 +1,7 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
+import {ThreeDots} from 'react-loader-spinner'
 import {BsPlusSquare, BsDashSquare} from 'react-icons/bs'
 
 import CartContext from '../../context/CartContext'
@@ -43,10 +43,7 @@ class ProductItemDetails extends Component {
   })
 
   getProductData = async () => {
-    const {match} = this.props
-    const {params} = match
-    const {id} = params
-
+    const {id} = this.props.match.params
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     })
@@ -79,8 +76,8 @@ class ProductItemDetails extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="products-details-loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    <div className="products-loader-container">
+      <ThreeDots color="#0b69ff" height={50} width={50} />
     </div>
   )
 
@@ -229,4 +226,9 @@ class ProductItemDetails extends Component {
   }
 }
 
-export default ProductItemDetails
+const ProductItemDetailsWithParams = (props) => {
+  const {id} = useParams()
+  return <ProductItemDetails {...props} match={{params: {id}}} />
+}
+
+export default ProductItemDetailsWithParams
