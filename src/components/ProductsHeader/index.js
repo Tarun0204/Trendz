@@ -1,14 +1,14 @@
-import {BsFilterRight} from 'react-icons/bs'
+import { BsFilterRight } from "react-icons/bs";
 
-import './index.css'
+import "./index.css";
 
-const ProductsHeader = props => {
-  const {sortbyOptions, activeOptionId} = props
+const ProductsHeader = (props) => {
+  const { sortbyOptions, activeOptionId } = props;
 
-  const onChangeSortby = event => {
-    const {changeSortby} = props
-    changeSortby(event.target.value)
-  }
+  const onChangeSortby = (event) => {
+    const { changeSortby } = props;
+    changeSortby(event.target.value);
+  };
 
   return (
     <div className="products-header">
@@ -21,7 +21,7 @@ const ProductsHeader = props => {
           value={activeOptionId}
           onChange={onChangeSortby}
         >
-          {sortbyOptions.map(eachOption => (
+          {sortbyOptions.map((eachOption) => (
             <option
               key={eachOption.optionId}
               value={eachOption.optionId}
@@ -33,7 +33,7 @@ const ProductsHeader = props => {
         </select>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductsHeader
+export default ProductsHeader;

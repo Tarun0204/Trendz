@@ -1,71 +1,79 @@
-import { Component } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import LoginForm from './components/LoginForm'
-import Home from './components/Home'
-import Products from './components/Products'
-import ProductItemDetails from './components/ProductItemDetails'
-import Cart from './components/Cart'
-import NotFound from './components/NotFound'
-import ProtectedRoute from './components/ProtectedRoute'
-import CartContext from './context/CartContext'
-import './App.css'
+import { Component } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import Home from "./components/Home";
+import Products from "./components/Products";
+import ProductItemDetails from "./components/ProductItemDetails";
+import Cart from "./components/Cart";
+import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+import CartContext from "./context/CartContext";
+import "./App.css";
 
 class App extends Component {
   state = {
-    cartList: [],
+    cartList: JSON.parse(localStorage.getItem("cartList")) || [],
+  };
+
+  componentDidUpdate(prevState) {
+    if (prevState.cartList !== this.state.cartList) {
+      localStorage.setItem("cartList", JSON.stringify(this.state.cartList));
+    }
   }
 
   incrementCartItemQuantity = (productId) => {
     this.setState((prevState) => {
       const updatedCartList = prevState.cartList.map((item) => {
         if (item.id === productId) {
-          return { ...item, quantity: item.quantity + 1 }
+          return { ...item, quantity: item.quantity + 1 };
         }
-        return item
-      })
-      return { cartList: updatedCartList }
-    })
-  }
+        return item;
+      });
+      return { cartList: updatedCartList };
+    });
+  };
 
   decrementCartItemQuantity = (productId) => {
     this.setState((prevState) => {
       const updatedCartList = prevState.cartList
         .map((item) => {
           if (item.id === productId && item.quantity > 1) {
-            return { ...item, quantity: item.quantity - 1 }
+            return { ...item, quantity: item.quantity - 1 };
           }
-          return item
+          return item;
         })
-        .filter((item) => item.quantity > 0)
-      return { cartList: updatedCartList }
-    })
-  }
+        .filter((item) => item.quantity > 0);
+      return { cartList: updatedCartList };
+    });
+  };
 
   removeAllCartItems = () => {
-    this.setState({ cartList: [] })
-  }
+    this.setState({ cartList: [] });
+  };
 
   addCartItem = (product) => {
-    const { cartList } = this.state
+    const { cartList } = this.state;
     const index = cartList.findIndex(
       (eachProduct) => eachProduct.id === product.id
-    )
+    );
     if (index === -1) {
-      this.setState({ cartList: [...cartList, product] })
+      this.setState({ cartList: [...cartList, product] });
     } else {
-      cartList.splice(index, 1)
-      this.setState({ cartList })
+      cartList.splice(index, 1);
+      this.setState({ cartList });
     }
-  }
+  };
 
   removeCartItem = (productId) => {
-    const { cartList } = this.state
-    const updatedCartList = cartList.filter((product) => product.id !== productId)
-    this.setState({ cartList: updatedCartList })
-  }
+    const { cartList } = this.state;
+    const updatedCartList = cartList.filter(
+      (product) => product.id !== productId
+    );
+    this.setState({ cartList: updatedCartList });
+  };
 
   render() {
-    const { cartList } = this.state
+    const { cartList } = this.state;
 
     return (
       <CartContext.Provider
@@ -116,8 +124,8 @@ class App extends Component {
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
       </CartContext.Provider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

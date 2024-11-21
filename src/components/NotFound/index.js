@@ -1,4 +1,4 @@
-import './index.css'
+import "./index.css";
 
 const NotFound = () => (
   <div className="not-found-container">
@@ -8,6 +8,6 @@ const NotFound = () => (
       className="not-found-img"
     />
   </div>
-)
+);
 
-export default NotFound
+export default NotFound;

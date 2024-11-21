@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom'
-import Header from '../Header'
+import { Link } from "react-router-dom";
+import Header from "../Header";
 
-import './index.css'
+import "./index.css";
 
 const Home = () => (
   <>
@@ -34,6 +34,6 @@ const Home = () => (
       />
     </div>
   </>
-)
+);
 
-export default Home
+export default Home;

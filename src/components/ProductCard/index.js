@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import './index.css'
+import "./index.css";
 
-const ProductCard = props => {
-  const {productData} = props
-  const {title, brand, imageUrl, rating, price, id} = productData
+const ProductCard = (props) => {
+  const { productData } = props;
+  const { title, brand, imageUrl, rating, price, id } = productData;
 
   return (
     <li className="product-item">
@@ -25,6 +25,6 @@ const ProductCard = props => {
         </div>
       </Link>
     </li>
-  )
-}
-export default ProductCard
+  );
+};
+export default ProductCard;

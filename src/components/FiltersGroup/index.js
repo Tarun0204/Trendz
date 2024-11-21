@@ -1,17 +1,17 @@
-import {BsSearch} from 'react-icons/bs'
+import { BsSearch } from "react-icons/bs";
 
-import './index.css'
+import "./index.css";
 
-const FiltersGroup = props => {
+const FiltersGroup = (props) => {
   const renderRatingsFiltersList = () => {
-    const {ratingsList} = props
+    const { ratingsList } = props;
 
-    return ratingsList.map(rating => {
-      const {changeRating, activeRatingId} = props
+    return ratingsList.map((rating) => {
+      const { changeRating, activeRatingId } = props;
       const ratingClassName =
-        activeRatingId === rating.ratingId ? `and-up active-rating` : `and-up`
+        activeRatingId === rating.ratingId ? `and-up active-rating` : `and-up`;
 
-      const onClickRatingItem = () => changeRating(rating.ratingId)
+      const onClickRatingItem = () => changeRating(rating.ratingId);
 
       return (
         <li
@@ -26,27 +26,27 @@ const FiltersGroup = props => {
           />
           <p className={ratingClassName}>& up</p>
         </li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   const renderRatingsFilters = () => (
     <div>
       <h1 className="rating-heading">Rating</h1>
       <ul className="ratings-list">{renderRatingsFiltersList()}</ul>
     </div>
-  )
+  );
 
   const renderCategoriesList = () => {
-    const {categoryOptions} = props
+    const { categoryOptions } = props;
 
-    return categoryOptions.map(category => {
-      const {changeCategory, activeCategoryId} = props
-      const onClickCategoryItem = () => changeCategory(category.categoryId)
-      const isActive = category.categoryId === activeCategoryId
+    return categoryOptions.map((category) => {
+      const { changeCategory, activeCategoryId } = props;
+      const onClickCategoryItem = () => changeCategory(category.categoryId);
+      const isActive = category.categoryId === activeCategoryId;
       const categoryClassName = isActive
         ? `category-name active-category-name`
-        : `category-name`
+        : `category-name`;
 
       return (
         <li
@@ -56,31 +56,31 @@ const FiltersGroup = props => {
         >
           <p className={categoryClassName}>{category.name}</p>
         </li>
-      )
-    })
-  }
+      );
+    });
+  };
 
   const renderProductCategories = () => (
     <>
       <h1 className="category-heading">Category</h1>
       <ul className="categories-list">{renderCategoriesList()}</ul>
     </>
-  )
+  );
 
-  const onEnterSearchInput = event => {
-    const {enterSearchInput} = props
-    if (event.key === 'Enter') {
-      enterSearchInput()
+  const onEnterSearchInput = (event) => {
+    const { enterSearchInput } = props;
+    if (event.key === "Enter") {
+      enterSearchInput();
     }
-  }
+  };
 
-  const onChangeSearchInput = event => {
-    const {changeSearchInput} = props
-    changeSearchInput(event.target.value)
-  }
+  const onChangeSearchInput = (event) => {
+    const { changeSearchInput } = props;
+    changeSearchInput(event.target.value);
+  };
 
   const renderSearchInput = () => {
-    const {searchInput} = props
+    const { searchInput } = props;
     return (
       <div className="search-input-container">
         <input
@@ -93,10 +93,10 @@ const FiltersGroup = props => {
         />
         <BsSearch className="search-icon" />
       </div>
-    )
-  }
+    );
+  };
 
-  const {clearFilters} = props
+  const { clearFilters } = props;
 
   return (
     <div className="filters-group-container">
@@ -111,7 +111,7 @@ const FiltersGroup = props => {
         Clear Filters
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default FiltersGroup
+export default FiltersGroup;

@@ -1,30 +1,30 @@
-import {Link, useNavigate} from 'react-router-dom'
-import Cookies from 'js-cookie'
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import Popup from "reactjs-popup";
+import CartContext from "../../context/CartContext";
 
-import CartContext from '../../context/CartContext'
-
-import './index.css'
+import "./index.css";
 
 const Header = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onClickLogout = () => {
-    Cookies.remove('jwt_token')
-    navigate('/login')
-  }
+    Cookies.remove("jwt_token");
+    navigate("/login");
+  };
 
   const renderCartItemsCount = () => (
     <CartContext.Consumer>
-      {value => {
-        const {cartList} = value
-        const cartItemsCount = cartList.length
+      {(value) => {
+        const { cartList } = value;
+        const cartItemsCount = cartList.length;
 
         return cartItemsCount > 0 ? (
           <span className="cart-count-badge">{cartItemsCount}</span>
-        ) : null
+        ) : null;
       }}
     </CartContext.Consumer>
-  )
+  );
 
   return (
     <nav className="nav-header">
@@ -33,29 +33,56 @@ const Header = () => {
           <Link to="/">
             <img
               className="website-logo"
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
+              src="https://ik.imagekit.io/6nnzgbkjv4/Logo.png?updatedAt=1732168705771"
               alt="website logo"
             />
           </Link>
 
-          <button
-            type="button"
-            className="nav-mobile-btn"
-            onClick={onClickLogout}
+          <Popup
+            className="logout-poup"
+            modal
+            trigger={
+              <button type="button" className="nav-mobile-btn">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-log-out-img.png"
+                  alt="nav logout"
+                  className="nav-bar-img"
+                />
+              </button>
+            }
           >
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-log-out-img.png"
-              alt="nav logout"
-              className="nav-bar-img"
-            />
-          </button>
+            {(close) => (
+              <div className="modal-container">
+                <p className="modal-description">
+                  Are you sure you want to Logout?
+                </p>
+                <div className="popup-buttons-container">
+                  <button
+                    type="button"
+                    data-testid="close-button"
+                    className="close-button"
+                    onClick={close}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="confirm-button"
+                    onClick={onClickLogout}
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            )}
+          </Popup>
         </div>
 
         <div className="nav-bar-large-container">
           <Link to="/">
             <img
               className="website-logo"
-              src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
+              src="https://ik.imagekit.io/6nnzgbkjv4/Logo.png?updatedAt=1732168705771"
               alt="website logo"
             />
           </Link>
@@ -79,13 +106,40 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-          <button
-            type="button"
-            className="logout-desktop-btn"
-            onClick={onClickLogout}
+          <Popup
+            className="logout-poup"
+            modal
+            trigger={
+              <button type="button" className="logout-desktop-btn">
+                Logout
+              </button>
+            }
           >
-            Logout
-          </button>
+            {(close) => (
+              <div className="modal-container">
+                <p className="modal-description">
+                  Are you sure you want to Logout?
+                </p>
+                <div className="popup-buttons-container">
+                  <button
+                    type="button"
+                    data-testid="close-button"
+                    className="close-button"
+                    onClick={close}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="confirm-button"
+                    onClick={onClickLogout}
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            )}
+          </Popup>
         </div>
       </div>
       <div className="nav-menu-mobile">
@@ -122,7 +176,7 @@ const Header = () => {
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
