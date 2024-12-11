@@ -56,6 +56,7 @@ const CartSummary = () => {
     <CartContext.Consumer>
       {value => {
         const {cartList, removeAllCartItems} = value
+
         let total = 0
         cartList.forEach(item => {
           total += item.price * item.quantity
